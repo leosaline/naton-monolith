@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 public class ProductServiceimp implements ProductService{
 	@Autowired
 	ProductRepository productRepository;
-	private String companyURL = "http://localhost:9003/company/";
+	private String companyURL = "http://localhost:9000/company/";
 
 	@Override
 	public Collection<Product> listProducts() {
@@ -25,8 +25,12 @@ public class ProductServiceimp implements ProductService{
 			ResponseEntity<String> response = restTemplate.getForEntity(companyURL + product.getId().toString(), String.class);
 			
 			JSONObject jsonObject = new JSONObject(response.getBody());
-			String name = (String) jsonObject.get("name");
-			product.setCompanyName(name);
+			if(jsonObject.get("name") == JSONObject.NULL) {
+				product.setCompanyName("Null");
+			} else {
+				String name = (String) jsonObject.get("name");
+				product.setCompanyName(name);	
+			}
 		}
 		
 		return listProduct;
