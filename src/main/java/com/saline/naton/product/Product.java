@@ -12,10 +12,10 @@ import javax.persistence.Transient;
 public class Product {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private PackageTypeEnum PackageType;
+	private PackageTypeEnum packageType;
 	private Long company;
 	@Transient
 	private String companyName;
@@ -33,10 +33,10 @@ public class Product {
 		this.name = name;
 	}
 	public PackageTypeEnum getPackageType() {
-		return PackageType;
+		return packageType;
 	}
 	public void setPackageType(PackageTypeEnum packageType) {
-		PackageType = packageType;
+		this.packageType = packageType;
 	}
 	public Long getCompany() {
 		return company;

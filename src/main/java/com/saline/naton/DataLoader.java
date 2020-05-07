@@ -42,5 +42,13 @@ public class DataLoader implements ApplicationRunner{
 	    	company.setEmail("jequiti@jequiti.com");
 	    	company.setTelephone(333333L);
 	        repo.save(company);
+	        
+	    	company = new Company();
+	    	company.setId(4L);
+	    	company.setActive(true);
+	    	company.setName("Generico");
+	    	company.setEmail("generico@generico.com");
+	    	company.setTelephone(444444L);
+	        repo.save(company);	        
 	    }
 }
