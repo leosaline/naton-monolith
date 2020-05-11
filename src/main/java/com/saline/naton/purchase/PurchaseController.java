@@ -28,17 +28,10 @@ public class PurchaseController {
 		return ResponseEntity.ok(this.purchaseService.listPurchase());
 	}
 	
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a single purchase created") })
-	@GetMapping(value="/purchase", produces = "application/json", consumes = "application/json")
-	@ResponseBody	
-	public ResponseEntity<Purchase> createPurchase(@RequestBody Purchase purchase){
-		return ResponseEntity.ok(this.purchaseService.save(purchase));
-	}
-	
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a single purchase") })
 	@GetMapping(value="/purchase/{id}", produces = "application/json", consumes = "application/json")
 	@ResponseBody
-	public ResponseEntity<Purchase> getProductById(@PathVariable Long id) {
+	public ResponseEntity<Purchase> getPurchaseById(@PathVariable Long id) {
 		return ResponseEntity.ok(this.purchaseService.getPurchaseById(id));
 	}
 	
@@ -46,7 +39,7 @@ public class PurchaseController {
 	@PostMapping(value = "/purchase", produces = "application/json")
 	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
 	@ResponseBody
-	public ResponseEntity<Purchase> createProduct(@RequestBody Purchase purchase) {
+	public ResponseEntity<Purchase> createPurchase(@RequestBody Purchase purchase) {
 		purchase.setDatePurchase(new Date());
 		purchase.setUser(1L);
 		
