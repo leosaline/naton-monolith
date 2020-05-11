@@ -34,7 +34,7 @@ public class ProductController {
 	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
 	@ResponseBody
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-		return ResponseEntity.ok(this.productService.save(product));
+		return ResponseEntity.ok(this.productService.save(product)); 
 	}
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a single product") })
