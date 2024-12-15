@@ -1,39 +1,36 @@
 package com.saline.naton.company;
 
-import java.util.Collection;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 public class CompanyController {
-	
-	@Autowired
-	private CompanyRepository repo;
-	
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return list of companies") })
+	private final CompanyRepository companyRepository;
+
+    public CompanyController(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
+    }
+
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Return list of companies") })
 	@GetMapping(value = "/companies", produces = "application/json")
 	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
-	@ResponseBody
 	public ResponseEntity<Collection<Company>> listProducts() {
-		return ResponseEntity.ok((Collection<Company>)this.repo.findAll());
+		return ResponseEntity.ok((Collection<Company>)this.companyRepository.findAll());
 	}
 	
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return Company by ID") })
 	@GetMapping(value = "/company/{id}", produces = "application/json")
 	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
-	@ResponseBody
 	public ResponseEntity<Company> companyById(@PathVariable Long id) {
-		Optional<Company> optCompany = this.repo.findById(id);
+		Optional<Company> optCompany = this.companyRepository.findById(id);
 		if(optCompany.isPresent())
 			return ResponseEntity.ok(optCompany.get());
 		else

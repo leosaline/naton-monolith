@@ -12,11 +12,14 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ProductServiceimp implements ProductService{
-	@Autowired
-	ProductRepository productRepository;
-	private String companyURL = "http://localhost:9000/company/";
+	private final ProductRepository productRepository;
+	private final String companyURL = "http://localhost:9000/company/";
 
-	@Override
+    public ProductServiceimp(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    @Override
 	public Collection<Product> listProducts() {
 		List<Product> listProduct = (List<Product>) productRepository.findAll();
 		
