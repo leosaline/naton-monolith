@@ -1,7 +1,7 @@
 package com.saline.naton.product;
 
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,30 +14,30 @@ import java.util.Collection;
 
 @RestController
 public class ProductController {
-	private final ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Return list of products") })
-	@GetMapping(value = "/products", produces = "application/json")
-	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
-	public ResponseEntity<Collection<Product>> listProducts() {
-		return ResponseEntity.ok(this.productService.listProducts());
-	}
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Return list of products")})
+    @GetMapping(value = "/products", produces = "application/json")
+    @CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
+    public ResponseEntity<Collection<Product>> listProducts() {
+        return ResponseEntity.ok(this.productService.listProducts());
+    }
 
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a new product") })
-	@PostMapping(value = "/product", produces = "application/json")
-	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
-	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-		return ResponseEntity.ok(this.productService.save(product)); 
-	}
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Return a new product")})
+    @PostMapping(value = "/product", produces = "application/json")
+    @CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        return ResponseEntity.ok(this.productService.save(product));
+    }
 
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a single product") })
-	@GetMapping(value = "/product/{id}", produces = "application/json")
-	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
-	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-		return ResponseEntity.ok(this.productService.getProductById(id));
-	}
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Return a single product")})
+    @GetMapping(value = "/product/{id}", produces = "application/json")
+    @CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.productService.getProductById(id));
+    }
 }

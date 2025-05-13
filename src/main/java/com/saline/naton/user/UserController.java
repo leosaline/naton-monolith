@@ -1,7 +1,8 @@
 package com.saline.naton.user;
 
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +19,14 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Return list of users")})
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Return list of users")})
     @GetMapping(value = "/users", produces = "application/json")
     @CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
     public ResponseEntity<Collection<UserNaton>> listUsers() {
         return ResponseEntity.ok((Collection<UserNaton>) this.userRepository.findAll());
     }
 
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Return User by ID")})
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Return User by ID")})
     @GetMapping(value = "/user/{id}", produces = "application/json")
     @CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
     public ResponseEntity<UserNaton> userById(@PathVariable Long id) {

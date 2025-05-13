@@ -1,2 +1,20 @@
 server:
   port: 9000
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb  # Define o banco de dados em memória
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    hikari:
+      maximumPoolSize: 10
+  h2:
+    console:
+      enabled: true  # Ativa o console H2 para acessar o banco via navegador
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update  # Criação/atualização automática do schema (pode ser "create", "validate", etc.)
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true  # Exibe as queries SQL no console
