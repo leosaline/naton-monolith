@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<swagger.version>2.2.30</swagger.version>
-		<json.version>20250107</json.version>
+		<json.version>20250517</json.version>
 		<lombok.version>1.18.38</lombok.version>
 	</properties>
 
